@@ -5,12 +5,15 @@ const _saveLocalTime = function _locTime(e) {
 localStorage.setItem('videoplayer-current-time', e.seconds);
     console.log(e.seconds)
 };
+
 player.on('timeupdate', throttle(_saveLocalTime, 2000))
-let curTime = localStorage.getItem('videoplayer-current-time');
+let curTime = localStorage.getItem('videoplayer-current-time', 0);
 startValueTime();
+
 player.setCurrentTime(curTime).then(function (event) {
-    localStorage.setItem('videoplayer-current-time', curTime);
+    localStorage.setItem('videoplayer-current-time', 0);
 });
+
 player.getVideoTitle().then(function(title) {
         console.log('title:', title);
 });
